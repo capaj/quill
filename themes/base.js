@@ -26,6 +26,21 @@ const HEADERS = [ '1', '2', '3', false ];
 const SIZES = [ 'small', false, 'large', 'huge' ];
 
 
+if (!Element.prototype.remove) {
+  // IE polyfill to get these newer DOM methods working there too
+  Element.prototype.remove = function() { // from https://stackoverflow.com/a/36303401/671457
+    this.parentElement.removeChild(this);
+  }
+  NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+  }
+}
+
+
 class BaseTheme extends Theme {
   constructor(quill, options) {
     super(quill, options);
