@@ -16,8 +16,11 @@ class Tooltip {
 
   hide() {
     this.root.classList.add('ql-hidden');
-    if (this.root.getElementsByClassName(linkNewWindowCheckWrapper)[0]) {
-      this.root.getElementsByClassName(linkNewWindowCheckWrapper)[0].remove()
+    const linkNewWindowCheckWrapperElement = this.root.getElementsByClassName(linkNewWindowCheckWrapper)[0];
+
+    if (linkNewWindowCheckWrapperElement) {
+      const parent = linkNewWindowCheckWrapperElement.parentNode
+      parent.removeChild(linkNewWindowCheckWrapperElement)
     }
   }
 
